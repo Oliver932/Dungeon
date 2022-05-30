@@ -1,4 +1,4 @@
-let gridNum = 6000
+let gridNum = 300
 let crossTime = 30
 let chaseFactor = 0.6
 let attackFactor = 6
@@ -30,6 +30,7 @@ let coinFactor = 0.5
 let coinWidth = 40
 let potionChance = 0.1
 let potionFactor = 1.1
+let bossChance = 0.1
 
 let speedDecay = 0.995
 let damageDecay = 1.01
@@ -38,10 +39,18 @@ let enemyStats = {
 
     'big_demon':{
 
+        'chaseTime': Math.floor(crossTime / 0.35),
+        'd': 1 * width,
+        'trapVulnerable':false,
+        'damage':0.2
+    }, 
+    
+    'ogre':{
+
         'chaseTime': Math.floor(crossTime / 0.45),
         'd': 1 * width,
         'trapVulnerable':false,
-        'damage':0.4
+        'damage':0.15
     },
 
     'chort':{
@@ -58,6 +67,14 @@ let enemyStats = {
         'd':0.45 * width,
         'trapVulnerable':true,
         'damage':0.04
+    },
+
+    'necromancer':{
+
+        'chaseTime': Math.floor(crossTime / 0.85),
+        'd':0.5 * width,
+        'trapVulnerable':false,
+        'damage':0.05
     },
 }
 
@@ -107,7 +124,7 @@ let potionStats = {
 const height = width
 
 
-let characterImages = ['knight_f', 'big_demon', 'chort', 'goblin']
+let characterImages = ['knight_f', 'big_demon', 'chort', 'goblin', 'necromancer', 'ogre']
 
 const r = innerWidth / innerHeight
 

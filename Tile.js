@@ -119,7 +119,14 @@ class Tile{
 
             if (this.chest == 'mimic') {
 
-                new Enemy('chort', this.x, this.y)
+                if (Math.random() < bossChance) {
+
+                    new Enemy('big_demon', this.x, this.y)
+
+                } else {
+
+                    new Enemy('chort', this.x, this.y)
+                }
             }
         }
 
@@ -127,7 +134,14 @@ class Tile{
 
             this.holeFull = false
 
-            new Enemy('goblin', this.x, this.y)
+            if (Math.random() < bossChance) {
+
+                new Enemy('ogre', this.x, this.y)
+
+            } else {
+
+                new Enemy('goblin', this.x, this.y)
+            }
     
         }
     }

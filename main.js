@@ -297,7 +297,7 @@ function setup() {
     endTile = maxTile
     endTile.type = 'End'
 
-    new Enemy('big_demon', endTile.x, endTile.y)
+    new Enemy('necromancer', endTile.x, endTile.y)
 
     // alert('Escape the dungeon')
 }
