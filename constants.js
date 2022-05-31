@@ -1,4 +1,4 @@
-let gridNum = 700
+let gridNum = 1000
 let crossTime = 30
 let chaseFactor = 0.6
 let attackFactor = 6

@@ -250,7 +250,12 @@ class Player{
         mask.text(round(this.attackFactor, 2).toString(), textSize * 2, 0)
 
         mask.imageMode(CORNER)
-        mask.translate( - coinWidth, -innerHeight/2 - heartWidth - textSize)  
+
+        mask.pop()
+
+        mask.push()
+
+        mask.translate(innerWidth/2 - coinWidth, innerHeight/4)  
 
         image = images.coin[Math.floor(time / 2) % 4]
         mask.image(image, 0, 0, coinWidth, coinWidth)
@@ -261,8 +266,20 @@ class Player{
         mask.textAlign(LEFT, TOP)
         mask.text(this.coins.toString(), coinWidth, 0)
 
-        mask.pop()
+        // mask.pop()
 
+        // mask.push()
+
+        let angle = createVector(endTile.x * width - this.x, endTile.y * height - this.y).heading()
+        let overshoot = 0.3;
+
+        mask.translate(coinWidth, innerHeight/4)
+        mask.stroke(255, 215, 0)
+        mask.noFill()
+        mask.strokeWeight(15)
+        mask.arc(0, 0, innerHeight, innerHeight, angle - overshoot, angle + overshoot, false)
+
+        mask.pop()
 
     }
 }
