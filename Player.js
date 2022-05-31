@@ -270,14 +270,22 @@ class Player{
 
         // mask.push()
 
-        let angle = createVector(endTile.x * width - this.x, endTile.y * height - this.y).heading()
-        let overshoot = 0.3;
+        let dx = (endTile.x + 0.5) * width - this.x
+        let dy = (endTile.y + 0.5) * height - this.y
 
-        mask.translate(coinWidth, innerHeight/4)
-        mask.stroke(255, 215, 0)
-        mask.noFill()
-        mask.strokeWeight(15)
-        mask.arc(0, 0, innerHeight, innerHeight, angle - overshoot, angle + overshoot, false)
+        if (Math.abs(dx) >= viewRadius/2 && Math.abs(dy) >= viewRadius/2){
+
+
+            let angle = createVector(dx, dy).heading()
+            let overshoot = 0.3;
+
+            mask.translate(coinWidth, innerHeight/4)
+            mask.stroke(255, 215, 0)
+            mask.noFill()
+            mask.strokeWeight(15)
+            mask.arc(0, 0, innerHeight, innerHeight, angle - overshoot, angle + overshoot, false)
+        
+        }
 
         mask.pop()
 

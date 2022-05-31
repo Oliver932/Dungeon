@@ -1,10 +1,10 @@
-let gridNum = 1000
+let gridNum = 1200
 let crossTime = 30
 let chaseFactor = 0.6
 let attackFactor = 6
 // let cutChance = 0.017
-let cutChance = 0.1
-let spikeChance = 0.35
+let cutChance = 0.07
+let spikeChance = 0.45
 let viewFactor = 15
 let barrierFactor = 0.1
 let burnTime = 30
@@ -32,8 +32,8 @@ let potionChance = 0.1
 let potionFactor = 1.1
 let bossChance = 0.15
 
-let speedDecay = 0.996
-let damageDecay = 0.996
+let speedDecay = 0.99
+let damageDecay = 0.99
 let Bfactor = 0.1
 
 let enemyStats = {

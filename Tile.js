@@ -16,6 +16,7 @@ class Tile{
         this.distance = 0
         this.visible = false
         this.seen = false
+        this.isEntered = false
         this.type = undefined
         this.alight = false
         this.deadEnd = false
@@ -158,6 +159,8 @@ class Tile{
 
     entered() {
 
+        this.isEntered = true
+
         if (this.coin) {
 
             this.coin = false
@@ -262,9 +265,23 @@ class Tile{
 
                         map.image(image, width, height/2, width/2, height/2)
 
+                        if (this.isEntered) {
+
+                            map.noStroke()
+                            map.fill(255, 255, 255, 60)
+                            map.rect(width, height/2, width/2, height/2)
+                        }
+
                     } else if (dy > 0) {
 
                         map.image(image, width/2, height, width/2, height/2)
+
+                        if (this.isEntered) {
+
+                            map.noStroke()
+                            map.fill(255, 255, 255, 40)
+                            map.rect(width/2, height, width/2, height/2)
+                        }
 
                     }
                 }
@@ -284,6 +301,11 @@ class Tile{
             map.fill(colour)
             map.rect(width/2, height/2, width/2, height/2)
         
+        } else if (this.isEntered) {
+
+            map.noStroke()
+            map.fill(255, 255, 255, 60)
+            map.rect(width/2, height/2, width/2, height/2)
         }
 
         if (this.chest) {
