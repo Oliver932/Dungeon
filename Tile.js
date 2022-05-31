@@ -30,10 +30,12 @@ class Tile{
         this.item = undefined
         this.chest = undefined
         this.chestClosed = true
+        this.chestOpened = false
         this.chestNum = 0
 
         this.coin = false
         this.potion = undefined
+        this.potionSize = 'small'
     }
 
     setup() {
@@ -55,6 +57,8 @@ class Tile{
                 } else {
 
                     this.chest = 'full'
+                    this.selectPotion()
+                    this.potionSize = 'big'
                 }
             }
 
@@ -86,27 +90,32 @@ class Tile{
 
         } else if (Math.random() < potionChance) {
 
-            let p = Math.random() 
-            let i = 0
-
-            for (const type in potionStats.small) {
-                if (Object.hasOwnProperty.call(potionStats.small, type)) {
-
-                    const potion = potionStats.small[type];
-
-                    i += potion.prop 
-
-                    if (p < i) {
-
-                        this.potion = type
-                        break
-                    }
-                }
-            }
+            this.selectPotion()
 
         } else {
 
             startOptions.push(this)
+        }
+    }
+
+    selectPotion() {
+
+        let p = Math.random() 
+        let i = 0
+
+        for (const type in potionStats) {
+            if (Object.hasOwnProperty.call(potionStats, type)) {
+
+                const potion = potionStats[type];
+
+                i += potion.prop 
+
+                if (p < i) {
+
+                    this.potion = type
+                    break
+                }
+            }
         }
     }
 
@@ -127,6 +136,7 @@ class Tile{
 
                     new Enemy('chort', this.x, this.y)
                 }
+
             }
         }
 
@@ -156,12 +166,26 @@ class Tile{
 
         if (this.potion) {
 
-            player.health = min(maxHealth, player.health + potionStats.small[this.potion].heal)
-            player.damageFactor *= potionStats.small[this.potion].damage
-            player.speedFactor *= potionStats.small[this.potion].speed
-
-            this.potion = undefined
+            this.applyPotion()
         }
+    }
+
+    applyPotion() {
+
+        if (this.potionSize == 'big') {
+
+            player.baseDamageFactor *= ((potionStats[this.potion].damage - 1) * Bfactor + 1)
+            player.baseSpeedFactor *= ((potionStats[this.potion].speed - 1) * Bfactor + 1)
+
+        } else {
+
+            player.health = min(maxHealth, player.health + potionStats[this.potion].heal)
+            player.damageFactor *= potionStats[this.potion].damage
+            player.speedFactor *= potionStats[this.potion].speed
+
+        }
+
+        this.potion = undefined
     }
 
     showBackground() {
@@ -282,6 +306,15 @@ class Tile{
                 // }
 
                 this.chestNum ++ 
+
+            } else if (!this.chestOpened && this.chest == 'full') {
+
+                this.chestOpened = true
+                
+                if (this.potion && player.tile == this) {
+
+                    this.applyPotion()
+                }
             }
         }
 
@@ -292,9 +325,9 @@ class Tile{
 
         }
 
-        if (this.potion) {
+        if ((this.potion && !this.chest) || (this.potion && this.chestOpened)) {
 
-            let image = images.potion.small[this.potion]
+            let image = images.potion[this.potionSize][this.potion]
             map.image(image, width/2, height/2, width * potionFactor/2, height * potionFactor/2)
 
         }

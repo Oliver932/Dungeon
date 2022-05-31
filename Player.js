@@ -21,6 +21,10 @@ class Player{
         this.speedFactor = 1
         this.attackFactor = 1
 
+        this.baseDamageFactor = 1
+        this.baseSpeedFactor = 1
+        this.baseAttackFactor = 1
+
         this.getDirections()
         this.getVisible()
 
@@ -157,9 +161,9 @@ class Player{
 
     update() {
 
-        this.health -= this.tile.damage * this.damageFactor
-        this.damageFactor = Math.min(1, this.damageFactor * damageDecay)
-        this.speedFactor = Math.max(1, this.speedFactor * speedDecay)
+        this.health -= this.tile.damage / this.damageFactor
+        this.damageFactor = Math.max(this.baseDamageFactor, this.damageFactor * damageDecay)
+        this.speedFactor = Math.max(this.baseDamageFactor, this.speedFactor * speedDecay)
 
         if (this.health <= 0){
 
@@ -233,17 +237,17 @@ class Player{
         mask.fill(215, 30, 30)
         mask.stroke(215, 30, 30)
 
-        mask.text(round(this.speedFactor, 1).toString(), -textSize * 2, 0)
+        mask.text(round(this.speedFactor, 2).toString(), -textSize * 2, 0)
 
         mask.fill(0, 0, 255)
         mask.stroke(0, 0, 255)
 
-        mask.text(round(this.damageFactor, 1).toString(), 0, 0)
+        mask.text(round(this.damageFactor, 2).toString(), 0, 0)
 
         mask.fill(250, 253, 15)
         mask.stroke(250, 253, 15)
 
-        mask.text(round(this.attackFactor, 1).toString(), textSize * 2, 0)
+        mask.text(round(this.attackFactor, 2).toString(), textSize * 2, 0)
 
         mask.imageMode(CORNER)
         mask.translate( - coinWidth, -innerHeight/2 - heartWidth - textSize)  

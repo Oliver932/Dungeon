@@ -129,18 +129,12 @@ function preload() {
         images.coin.push(loadImage('/Tileset/frames/coin_anim_f' + i.toString() + '.png'))
     }
 
-    images['potion'] = {}
+    images['potion'] = {'small':[],'big':[]}
 
-    for (const size of Object.keys(potionStats)) {
+    for (const type of Object.keys(potionStats)) {
 
-        console.log(size)
-
-        images.potion[size] = {}
-
-        for (const type of Object.keys(potionStats[size])) {
-
-            images.potion[size][type] = loadImage('/Tileset/frames/flask_' + type + '.png')
-        }
+        images.potion.small[type] = loadImage('/Tileset/frames/flask_' + type + '.png')
+        images.potion.big[type] = loadImage('/Tileset/frames/flask_big_' + type + '.png')
     }
 
     console.log(images)

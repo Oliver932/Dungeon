@@ -1,4 +1,4 @@
-let gridNum = 300
+let gridNum = 700
 let crossTime = 30
 let chaseFactor = 0.6
 let attackFactor = 6
@@ -30,10 +30,11 @@ let coinFactor = 0.5
 let coinWidth = 40
 let potionChance = 0.1
 let potionFactor = 1.1
-let bossChance = 0.1
+let bossChance = 0.15
 
-let speedDecay = 0.995
-let damageDecay = 1.01
+let speedDecay = 0.996
+let damageDecay = 0.996
+let Bfactor = 0.1
 
 let enemyStats = {
 
@@ -42,7 +43,7 @@ let enemyStats = {
         'chaseTime': Math.floor(crossTime / 0.35),
         'd': 1 * width,
         'trapVulnerable':false,
-        'damage':0.2
+        'damage':0.15
     }, 
     
     'ogre':{
@@ -50,7 +51,7 @@ let enemyStats = {
         'chaseTime': Math.floor(crossTime / 0.45),
         'd': 1 * width,
         'trapVulnerable':false,
-        'damage':0.15
+        'damage':0.12
     },
 
     'chort':{
@@ -80,45 +81,42 @@ let enemyStats = {
 
 let potionStats = {
 
-    'small':{
-
-        'blue':{
-            
-            'prop': 0.25,
-            'heal':1,
-            'damage':0.25,
-            'speed':1.5
+    'blue':{
         
-        },
+        'prop': 0.25,
+        'heal':1,
+        'damage':2,
+        'speed':1.25
+    
+    },
 
 
-        'green':{
-            
-            'prop': 0.25,
-            'heal':2,
-            'damage':0.5,
-            'speed':1.25
+    'green':{
         
-        },
+        'prop': 0.25,
+        'heal':2,
+        'damage':1.75,
+        'speed':1.25
+    
+    },
 
-        'yellow':{
-            
-            'prop': 0.25,
-            'heal':0.5,
-            'damage':0.5,
-            'speed':1.75
+    'yellow':{
         
-        },
+        'prop': 0.25,
+        'heal':0.5,
+        'damage':1.5,
+        'speed':1.5
+    
+    },
 
-        'red':{
-            
-            'prop': 0.25,
-            'heal':0.25,
-            'damage':0.75,
-            'speed':2
+    'red':{
         
-        },
-    }
+        'prop': 0.25,
+        'heal':0.25,
+        'damage':1.25,
+        'speed':2
+    
+    },
 }
 
 const height = width
